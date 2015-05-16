@@ -3,6 +3,7 @@ package com.github.fge.multiterator.list;
 import com.github.fge.multiterator.base.ValuesBase;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 public final class ListValues<T>
     extends ValuesBase<T, ListValues<T>>
@@ -39,5 +40,11 @@ public final class ListValues<T>
     public ListValues<T> nextWindow()
     {
         return new ListValues<>(this, offset + windowSize);
+    }
+
+    @Override
+    public Stream<T> stream()
+    {
+        return list.subList(offset, offset + windowSize).stream();
     }
 }

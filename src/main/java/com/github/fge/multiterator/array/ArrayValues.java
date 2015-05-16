@@ -2,6 +2,9 @@ package com.github.fge.multiterator.array;
 
 import com.github.fge.multiterator.base.ValuesBase;
 
+import java.util.Arrays;
+import java.util.stream.Stream;
+
 public final class ArrayValues<T>
     extends ValuesBase<T, ArrayValues<T>>
 {
@@ -36,5 +39,13 @@ public final class ArrayValues<T>
     public ArrayValues<T> nextWindow()
     {
         return new ArrayValues<>(this, offset + windowSize);
+    }
+
+    @Override
+    public Stream<T> stream()
+    {
+        final T[] subArray
+            = Arrays.copyOfRange(array, offset, offset + windowSize);
+        return Arrays.stream(subArray);
     }
 }

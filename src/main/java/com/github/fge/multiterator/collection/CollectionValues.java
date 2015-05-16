@@ -2,8 +2,10 @@ package com.github.fge.multiterator.collection;
 
 import com.github.fge.multiterator.base.ValuesBase;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public final class CollectionValues<T>
     extends ValuesBase<T, CollectionValues<T>>
@@ -54,5 +56,12 @@ public final class CollectionValues<T>
         IntStream.range(0, windowSize)
             .forEach(index -> newValues[index] = iterator.next());
         return new CollectionValues<>(this, offset + windowSize, newValues);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public Stream<T> stream()
+    {
+        return Arrays.stream((T[]) values);
     }
 }

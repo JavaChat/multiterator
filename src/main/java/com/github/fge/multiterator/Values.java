@@ -1,6 +1,7 @@
 package com.github.fge.multiterator;
 
-@FunctionalInterface
+import java.util.stream.Stream;
+
 public interface Values<T>
 {
     T get(int index);
@@ -14,4 +15,6 @@ public interface Values<T>
     {
         return get(1);
     }
+
+    Stream<T> stream();
 }
