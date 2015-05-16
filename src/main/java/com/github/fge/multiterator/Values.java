@@ -27,4 +27,10 @@ public interface Values<T>
     {
         return stream().iterator();
     }
+
+    @Override
+    int hashCode();
+
+    @Override
+    boolean equals(Object obj);
 }
