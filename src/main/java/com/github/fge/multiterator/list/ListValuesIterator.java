@@ -3,7 +3,6 @@ package com.github.fge.multiterator.list;
 import com.github.fge.multiterator.base.ValuesIteratorBase;
 
 import java.util.List;
-import java.util.function.UnaryOperator;
 
 final class ListValuesIterator<T>
     extends ValuesIteratorBase<T, ListValues<T>>
@@ -12,9 +11,9 @@ final class ListValuesIterator<T>
 
     @SuppressWarnings("AssignmentToCollectionOrArrayFieldFromParameter")
     ListValuesIterator(final List<T> list, final int inputSize,
-        final int windowSize, final UnaryOperator<ListValues<T>> operator)
+        final int windowSize, final boolean windowed)
     {
-        super(inputSize, windowSize, operator);
+        super(inputSize, windowSize, windowed);
         this.list = list;
     }
 

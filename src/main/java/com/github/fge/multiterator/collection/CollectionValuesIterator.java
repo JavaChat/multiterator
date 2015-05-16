@@ -3,7 +3,6 @@ package com.github.fge.multiterator.collection;
 import com.github.fge.multiterator.base.ValuesIteratorBase;
 
 import java.util.Iterator;
-import java.util.function.UnaryOperator;
 
 final class CollectionValuesIterator<T>
     extends ValuesIteratorBase<T, CollectionValues<T>>
@@ -11,10 +10,9 @@ final class CollectionValuesIterator<T>
     private final Iterator<T> iterator;
 
     CollectionValuesIterator(final Iterator<T> iterator,
-        final int inputSize, final int windowSize,
-        final UnaryOperator<CollectionValues<T>> operator)
+        final int inputSize, final int windowSize, final boolean windowed)
     {
-        super(inputSize, windowSize, operator);
+        super(inputSize, windowSize, windowed);
         this.iterator = iterator;
     }
 

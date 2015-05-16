@@ -24,6 +24,6 @@ public final class CollectionMultiterator<T>
     {
         final Iterator<T> iterator = collection.iterator();
         return new CollectionValuesIterator<>(iterator, inputSize, windowSize,
-            operator);
+            windowed);
     }
 }

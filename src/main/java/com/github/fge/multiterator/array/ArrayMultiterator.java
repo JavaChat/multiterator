@@ -22,6 +22,6 @@ public final class ArrayMultiterator<T>
     public Iterator<Values<T>> iterator()
     {
         return new ArrayValuesIterator<>(array, inputSize, windowSize,
-            operator);
+            windowed);
     }
 }

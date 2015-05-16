@@ -22,6 +22,6 @@ public final class ListMultiterator<T>
     @Override
     public Iterator<Values<T>> iterator()
     {
-        return new ListValuesIterator<>(list, inputSize, windowSize, operator);
+        return new ListValuesIterator<>(list, inputSize, windowSize, windowed);
     }
 }

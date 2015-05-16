@@ -2,8 +2,6 @@ package com.github.fge.multiterator.array;
 
 import com.github.fge.multiterator.base.ValuesIteratorBase;
 
-import java.util.function.UnaryOperator;
-
 final class ArrayValuesIterator<T>
     extends ValuesIteratorBase<T, ArrayValues<T>>
 {
@@ -11,9 +9,9 @@ final class ArrayValuesIterator<T>
 
     @SuppressWarnings("AssignmentToCollectionOrArrayFieldFromParameter")
     ArrayValuesIterator(final T[] array, final int inputSize,
-        final int windowSize, final UnaryOperator<ArrayValues<T>> operator)
+        final int windowSize, final boolean windowed)
     {
-        super(inputSize, windowSize, operator);
+        super(inputSize, windowSize, windowed);
         this.array = array;
     }
 

@@ -16,11 +16,11 @@ public abstract class ValuesIteratorBase<T, V extends ValuesBase<T, V>>
     protected V currentValue = null;
 
     protected ValuesIteratorBase(final int inputSize, final int windowSize,
-        final UnaryOperator<V> operator)
+        final boolean windowed)
     {
         this.inputSize = inputSize;
         this.windowSize = windowSize;
-        this.operator = operator;
+        operator = windowed ? ValuesBase::nextWindow : ValuesBase::shift;
     }
 
     protected abstract V initialValue();
