@@ -2,6 +2,8 @@ package com.github.fge.multiterator.base;
 
 import com.github.fge.multiterator.Values;
 
+import java.util.stream.Collectors;
+
 public abstract class ValuesBase<T, V extends ValuesBase<T, V>>
     implements Values<T>
 {
@@ -41,4 +43,11 @@ public abstract class ValuesBase<T, V extends ValuesBase<T, V>>
     public abstract V shift();
 
     public abstract V nextWindow();
+
+    @Override
+    public final String toString()
+    {
+        return stream().map(Object::toString)
+            .collect(Collectors.joining(", "));
+    }
 }
