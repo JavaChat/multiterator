@@ -68,37 +68,6 @@ public abstract class MultiteratorTest<M extends Multiterator<Integer>>
     }
 
     @Test
-    public final void iterableShiftTest()
-    {
-        final Stream<Integer> stream = IntStream.range(0, 3).boxed();
-        final MultiteratorBuilder builder = Multiterator.ofSize(2);
-        final Multiterator<Integer> multiterator
-            = getMultiterator(builder, stream);
-
-        final Iterator<Values<Integer>> iterator = multiterator.iterator();
-        Values<Integer> values;
-
-        assertThat(iterator.hasNext());
-
-        values = iterator.next();
-
-        assertThat(values.get(0)).isEqualTo(0);
-        assertThat(values.get(1)).isEqualTo(1);
-
-        assertThat(iterator.hasNext()).isTrue();
-
-        values = iterator.next();
-
-        assertThat(values.get(0)).isEqualTo(1);
-        assertThat(values.get(1)).isEqualTo(2);
-
-        assertThat(iterator.hasNext()).isFalse();
-
-        assertThatThrownBy(iterator::next)
-            .isExactlyInstanceOf(NoSuchElementException.class);
-    }
-
-    @Test
     public final void streamShiftTest()
     {
         final Stream<Integer> stream = IntStream.range(0, 3).boxed();
@@ -128,37 +97,6 @@ public abstract class MultiteratorTest<M extends Multiterator<Integer>>
 
         assertThat(values.get(0)).isEqualTo(1);
         assertThat(values.get(1)).isEqualTo(2);
-
-        assertThat(iterator.hasNext()).isFalse();
-
-        assertThatThrownBy(iterator::next)
-            .isExactlyInstanceOf(NoSuchElementException.class);
-    }
-
-    @Test
-    public final void iterableWindowedTest()
-    {
-        final Stream<Integer> stream = IntStream.range(0, 4).boxed();
-        final MultiteratorBuilder builder = Multiterator.ofSize(2).windowed();
-        final Multiterator<Integer> multiterator
-            = getMultiterator(builder, stream);
-
-        final Iterator<Values<Integer>> iterator = multiterator.iterator();
-        Values<Integer> values;
-
-        assertThat(iterator.hasNext());
-
-        values = iterator.next();
-
-        assertThat(values.get(0)).isEqualTo(0);
-        assertThat(values.get(1)).isEqualTo(1);
-
-        assertThat(iterator.hasNext()).isTrue();
-
-        values = iterator.next();
-
-        assertThat(values.get(0)).isEqualTo(2);
-        assertThat(values.get(1)).isEqualTo(3);
 
         assertThat(iterator.hasNext()).isFalse();
 

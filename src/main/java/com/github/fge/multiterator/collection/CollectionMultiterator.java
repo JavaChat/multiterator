@@ -21,14 +21,6 @@ public final class CollectionMultiterator<T>
     }
 
     @Override
-    public Iterator<Values<T>> iterator()
-    {
-        final Iterator<T> iterator = collection.iterator();
-        return new CollectionValuesIterator<>(iterator, inputSize, windowSize,
-            windowed);
-    }
-
-    @Override
     public Spliterator<Values<T>> spliterator()
     {
         final Iterator<T> iterator = collection.iterator();

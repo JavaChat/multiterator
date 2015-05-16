@@ -3,7 +3,6 @@ package com.github.fge.multiterator.list;
 import com.github.fge.multiterator.Values;
 import com.github.fge.multiterator.base.MultiteratorBase;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Spliterator;
 
@@ -18,12 +17,6 @@ public final class ListMultiterator<T>
     {
         super(list.size(), windowSize, windowed);
         this.list = list;
-    }
-
-    @Override
-    public Iterator<Values<T>> iterator()
-    {
-        return new ListValuesIterator<>(list, inputSize, windowSize, windowed);
     }
 
     @Override

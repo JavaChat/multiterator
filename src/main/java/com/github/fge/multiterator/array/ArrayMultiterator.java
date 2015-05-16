@@ -3,7 +3,6 @@ package com.github.fge.multiterator.array;
 import com.github.fge.multiterator.Values;
 import com.github.fge.multiterator.base.MultiteratorBase;
 
-import java.util.Iterator;
 import java.util.Spliterator;
 
 public final class ArrayMultiterator<T>
@@ -17,13 +16,6 @@ public final class ArrayMultiterator<T>
     {
         super(array.length, windowSize, windowed);
         this.array = array;
-    }
-
-    @Override
-    public Iterator<Values<T>> iterator()
-    {
-        return new ArrayValuesIterator<>(array, inputSize, windowSize,
-            windowed);
     }
 
     @Override
