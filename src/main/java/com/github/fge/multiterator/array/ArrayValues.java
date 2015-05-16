@@ -1,52 +1,39 @@
 package com.github.fge.multiterator.array;
 
-import com.github.fge.multiterator.Values;
+import com.github.fge.multiterator.base.ValuesBase;
 
 public final class ArrayValues<T>
-    implements Values<T>
+    extends ValuesBase<T, ArrayValues<T>>
 {
-    private final int windowSize;
-    private final int arraySize;
-    private final int offset;
     private final T[] array;
 
     @SuppressWarnings("AssignmentToCollectionOrArrayFieldFromParameter")
-    ArrayValues(final T[] array, final int arraySize, final int windowSize)
+    ArrayValues(final T[] array, final int inputSize, final int windowSize)
     {
+        super(inputSize, windowSize);
         this.array = array;
-        this.arraySize = arraySize;
-        this.windowSize = windowSize;
-        offset = 0;
     }
 
     private ArrayValues(final ArrayValues<T> prev, final int offset)
     {
-        windowSize = prev.windowSize;
-        arraySize = prev.arraySize;
+        super(prev, offset);
         array = prev.array;
-        this.offset = offset;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public T get(final int index)
+    public T doGet(final int index)
     {
-        if (index >= windowSize)
-            throw new IndexOutOfBoundsException();
         return array[offset + index];
     }
 
-    boolean hasNext()
-    {
-        return offset + windowSize < arraySize;
-    }
-
-    ArrayValues<T> shift()
+    @Override
+    public ArrayValues<T> shift()
     {
         return new ArrayValues<>(this, offset + 1);
     }
 
-    ArrayValues<T> nextWindow()
+    @Override
+    public ArrayValues<T> nextWindow()
     {
         return new ArrayValues<>(this, offset + windowSize);
     }

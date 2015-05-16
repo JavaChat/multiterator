@@ -1,27 +1,22 @@
 package com.github.fge.multiterator.collection;
 
-import com.github.fge.multiterator.Values;
+import com.github.fge.multiterator.base.ValuesBase;
 
 import java.util.Iterator;
 import java.util.stream.IntStream;
 
 public final class CollectionValues<T>
-    implements Values<T>
+    extends ValuesBase<T, CollectionValues<T>>
 {
-    private final int windowSize;
-    private final int collectionSize;
-    private final int offset;
     private final Object[] values;
 
     private final Iterator<T> iterator;
 
-    CollectionValues(final Iterator<T> iterator, final int collectionSize,
+    CollectionValues(final Iterator<T> iterator, final int inputSize,
         final int windowSize)
     {
+        super(inputSize, windowSize);
         this.iterator = iterator;
-        this.collectionSize = collectionSize;
-        this.windowSize = windowSize;
-        offset = 0;
         values = new Object[windowSize];
 
         IntStream.range(0, windowSize)
@@ -29,28 +24,22 @@ public final class CollectionValues<T>
     }
 
     private CollectionValues(final CollectionValues<T> prev, final int offset,
-        final Object[] values)
+        final Object... values)
     {
-        windowSize = prev.windowSize;
-        collectionSize = prev.collectionSize;
-        this.offset = offset;
+        super(prev, offset);
         this.values = values;
         iterator = prev.iterator;
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public T get(final int index)
+    public T doGet(final int index)
     {
         return (T) values[index];
     }
 
-    boolean hasNext()
-    {
-        return offset + windowSize < collectionSize;
-    }
-
-    CollectionValues<T> shift()
+    @Override
+    public CollectionValues<T> shift()
     {
         final Object[] newValues = new Object[windowSize];
         System.arraycopy(values, 1, newValues, 0, windowSize - 1);
@@ -58,7 +47,8 @@ public final class CollectionValues<T>
         return new CollectionValues<>(this, offset + 1, newValues);
     }
 
-    CollectionValues<T> nextWindow()
+    @Override
+    public CollectionValues<T> nextWindow()
     {
         final Object[] newValues = new Object[windowSize];
         IntStream.range(0, windowSize)
