@@ -1,5 +1,6 @@
 package com.github.fge.multiterator;
 
+import com.github.fge.multiterator.array.ArrayMultiterator;
 import com.github.fge.multiterator.collection.CollectionMultiterator;
 import com.github.fge.multiterator.list.ListMultiterator;
 
@@ -35,6 +36,12 @@ public final class MultiteratorBuilder
     {
         checkSize(list.size());
         return new ListMultiterator<>(list,  windowSize, windowed);
+    }
+
+    public <T> Multiterator<T> over(final T... array)
+    {
+        checkSize(array.length);
+        return new ArrayMultiterator<>(array, windowSize, windowed);
     }
 
     private void checkSize(final int size)

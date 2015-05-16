@@ -13,8 +13,8 @@ None yet!
 
 ## What this is
 
-This package implements "multivalued" iterators over `Collection`s. There are
-two iteration modes:
+This package implements "multivalued" iterators over `Collection`s and arrays.
+There are two iteration modes:
 
 * shift by one,
 * shift by the window size.
@@ -70,10 +70,22 @@ for (final Values<Integer> values: multiterator)
 multiterator.forEach(
     values -> System.out.printf("%d, %d\n", values.get(0), values.get(1))
 );
+
+/*
+ * With an array...
+ */
+final Integer[] array = IntStream.rangeClosed(0, 3)
+    .boxed()
+    .toArray(Integer[]::new);
+
+final Multiterator<Integer> multiterator = Multiterator.ofSize(2)
+    .over(array);
+
+// etc etc
 ```
 
 ## Future plans
 
-* Make `Multiterator<T>` implement `Stream<Values<T>>`.
+* Stream support.
 * Others! Open to ideas...
 
