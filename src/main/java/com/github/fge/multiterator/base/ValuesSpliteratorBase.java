@@ -58,6 +58,6 @@ public abstract class ValuesSpliteratorBase<T, V extends ValuesBase<T, V>>
     @Override
     public final int characteristics()
     {
-        return ORDERED | SIZED;
+        return ORDERED | SIZED | NONNULL;
     }
 }
