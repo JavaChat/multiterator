@@ -127,6 +127,11 @@ three
 four
 ```
 
+You can extract the element at a given index in a `Value` instance using the
+`.get()` method (note: indices start at 0; therefore `.get(0)` will get the
+first element). There are also shortcut methods for the first and second
+elements respectively: `.first()`, `.second()`.
+
 `Values` implements both `.equals()` and `.hashCode()` as well. This means that:
 
 ```java
