@@ -13,81 +13,137 @@ None yet!
 
 ## What this is
 
-This package implements "multivalued" iterators over `Collection`s and arrays.
-There are two iteration modes:
+This package implements "multivalued" iterators/streams over `Collection`s and
+arrays. There are two iteration modes:
 
 * shift by one,
 * shift by the window size.
 
-The interface is called `Multiterator`, and for some type `T` it implements
-`Iterable<Values<T>>`, from which you can `.get()` values.
+## Examples
 
-Example:
+### `Multiterator`, "shift by one" version
+
+Let us have this list as an example:
 
 ```java
-final List<Integer> list = IntStream.rangeClosed(0, 3).boxed()
-    .collect(Collectors.toList());
-
-// A simple, shift by 1 multiterator
-final Multiterator<Integer> multiterator = Multiterator.ofSize(2)
-    .over(list);
-
-/*
- * The following prints:
- * 0, 1
- * 1, 2
- * 2, 3
- */
-for (final Values<Integer> values: multiterator)
-    System.out.printf("%d, %d\n", values.get(0), values.get(1));
-
-/*
- * Shortcut methods also exist:
- *
- * - values.first() (equivalent to .get(0));
- * - values.second() (equivalent to .get(1)).
- */
-
-// Java 8 style of the above:
-multiterator.forEach(
-    values -> System.out.printf("%d, %d\n", values.get(0), values.get(1))
-);
-
-// A window-shifting multiterator
-final Multiterator<Integer> multiterator = Multiterator.ofSize(2)
-    .windowed()
-    .over(list);
-
-/*
- * The following prints:
- * 0, 1
- * 2, 3
- */
-for (final Values<Integer> values: multiterator)
-    System.out.printf("%d, %d\n", values.get(0), values.get(1));
-
-// Java 8 style of the above:
-multiterator.forEach(
-    values -> System.out.printf("%d, %d\n", values.get(0), values.get(1))
-);
-
-/*
- * With an array...
- */
-final Integer[] array = IntStream.rangeClosed(0, 3)
-    .boxed()
-    .toArray(Integer[]::new);
-
-final Multiterator<Integer> multiterator = Multiterator.ofSize(2)
-    .over(array);
-
-// etc etc
+final List<String> list = Arrays.asList("one", "two", "three", "four");
 ```
+
+This is how you build a `Multiterator` of size 2 over this list:
+
+```java
+// Yes, I did it on purpose to use the vocabulary above
+final Multiterator<String> multiterator = Multiterator.ofSize(2).over(list);
+```
+
+As the paragraph above mentions, you can also use a `Multiterator` over any
+`Collection`, or an array:
+
+```java
+Multiterator.ofSize(2).over(someSet);
+Multiterator.ofSize(2).over(someArray);
+```
+
+A `Multiterator<T>` implements `Iterable<Value<T>>`, so you can do:
+
+```java
+// Print all two values
+multiterator.forEach(System.out::println);
+```
+
+The above will print:
+
+```
+<one, two>
+<two, three>
+<three, four>
+```
+
+It also has a `.stream()` method which returns a `Stream<Value<T>>`, so, for
+instance, you could use this to print the uppercase values of all "pairs":
+
+```java
+multiterator.stream().map(String::toUppercase).forEach(System.out::println)
+```
+
+The above will print:
+
+```
+<ONE, TWO>
+<TWO, THREE>
+<THREE, FOUR>
+```
+
+### `Multiterator`, windowing mode
+
+In this mode, the window shifts by the window size on each iteration.
+
+Always given the list above, initialize a `Multiterator` like this:
+
+```java
+final Multiterator<String> multiterator = Multiterator.ofSize(2)
+    .windowed() // Enable window mode
+    .over(list);
+```
+
+If you then do:
+
+```java
+multiterator.forEach(System.out::println);
+```
+
+this will now print:
+
+```
+<one, two>
+<three, four>
+```
+
+In this mode, it is of course required that the size of your
+collection/list/array be a multiple of the window size!
+
+### `Values`
+
+`Values` are the elements of a `Multiterator`. They themselves implement
+`Iterable<T>` and have a `.stream()` method producing a `Stream<T>`.
+
+For instance, always using the same list:
+
+```java
+multiterator.ofSize(2).over(list)
+    .stream()                       // Stream<Values<String>>
+    .flatMap(Values::stream)        // Stream<String>
+    .forEach(System.out::println);
+```
+
+this will print:
+
+```
+one
+two
+two
+three
+three
+four
+```
+
+`Values` implements both `.equals()` and `.hashCode()` as well. This means that:
+
+```java
+final List<String> list = Arrays.asList("one", "two", "three", "two", "three");
+System.out.println(Multiterator.ofSize(2)
+    .over(list)
+    .stream()
+    .distinct()
+    .count()
+);
+```
+
+will print `3`.
 
 ## Future plans
 
-* Stream support.
-* `{Long,Double,Int}Multiterator for primitive arrays (wrap `char[]` into `Int*`
+* `{Long,Double,Int}Multiterator` for primitive arrays (wrap `char[]` into `Int*`
   and `float` into `Double*`
 * Others! Open to ideas...
 
