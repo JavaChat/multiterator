@@ -2,6 +2,7 @@ package com.github.fge.multiterator;
 
 import org.testng.annotations.Test;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -11,6 +12,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.shouldHaveThrown;
 
 public abstract class MultiteratorTest<M extends Multiterator<Integer>>
 {
@@ -33,6 +35,36 @@ public abstract class MultiteratorTest<M extends Multiterator<Integer>>
             = getMultiterator(builder, stream);
 
         assertThat(multiterator).isExactlyInstanceOf(expectedClass);
+    }
+
+    @Test
+    public void undersizedCollectionTest()
+    {
+        final Stream<Integer> stream
+            = Collections.<Integer>emptyList().stream();
+
+        try {
+            getMultiterator(Multiterator.ofSize(1), stream);
+            shouldHaveThrown(IllegalArgumentException.class);
+        } catch (IllegalArgumentException e) {
+            assertThat(e).hasMessage("size of collection (0) is lower than "
+                + "requested window size (1)");
+        }
+    }
+
+    @Test
+    public void incorrectCollectionSizeForWindowTest()
+    {
+        final Stream<Integer> stream = IntStream.range(0, 5)
+            .boxed();
+
+        try {
+            getMultiterator(Multiterator.ofSize(2).windowed(), stream);
+            shouldHaveThrown(IllegalArgumentException.class);
+        } catch (IllegalArgumentException e) {
+            assertThat(e).hasMessage("size of collection (5) is not a multiple"
+                + " of requested window size (2)");
+        }
     }
 
     @Test
