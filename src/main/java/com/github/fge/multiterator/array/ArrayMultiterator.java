@@ -1,32 +1,27 @@
 package com.github.fge.multiterator.array;
 
-import com.github.fge.multiterator.Multiterator;
 import com.github.fge.multiterator.Values;
+import com.github.fge.multiterator.base.MultiteratorBase;
 
 import java.util.Iterator;
-import java.util.function.UnaryOperator;
 
 public final class ArrayMultiterator<T>
-    implements Multiterator<T>
+    extends MultiteratorBase<T, ArrayValues<T>>
 {
     private final T[] array;
-    private final int size;
-    private final int windowSize;
-    private final UnaryOperator<ArrayValues<T>> operator;
 
     @SuppressWarnings("AssignmentToCollectionOrArrayFieldFromParameter")
     public ArrayMultiterator(final T[] array, final int windowSize,
         final boolean windowed)
     {
+        super(array.length, windowSize, windowed);
         this.array = array;
-        size = array.length;
-        this.windowSize = windowSize;
-        operator = windowed ? ArrayValues::nextWindow : ArrayValues::shift;
     }
 
     @Override
     public Iterator<Values<T>> iterator()
     {
-        return new ArrayValuesIterator<>(array, size, windowSize, operator);
+        return new ArrayValuesIterator<>(array, inputSize, windowSize,
+            operator);
     }
 }
