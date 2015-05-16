@@ -5,6 +5,7 @@ import com.github.fge.multiterator.base.MultiteratorBase;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Spliterator;
 
 public final class ListMultiterator<T>
     extends MultiteratorBase<T, ListValues<T>>
@@ -23,5 +24,12 @@ public final class ListMultiterator<T>
     public Iterator<Values<T>> iterator()
     {
         return new ListValuesIterator<>(list, inputSize, windowSize, windowed);
+    }
+
+    @Override
+    public Spliterator<Values<T>> spliterator()
+    {
+        return new ListValuesSpliterator<>(list, inputSize, windowSize,
+            windowed);
     }
 }

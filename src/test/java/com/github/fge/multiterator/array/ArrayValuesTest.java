@@ -4,7 +4,7 @@ import com.github.fge.multiterator.ValuesTest;
 
 import java.util.stream.Stream;
 
-public final class ArraysValuesTest
+public final class ArrayValuesTest
     extends ValuesTest<ArrayValues<Integer>>
 
 {

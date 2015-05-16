@@ -4,6 +4,7 @@ import com.github.fge.multiterator.Values;
 import com.github.fge.multiterator.base.MultiteratorBase;
 
 import java.util.Iterator;
+import java.util.Spliterator;
 
 public final class ArrayMultiterator<T>
     extends MultiteratorBase<T, ArrayValues<T>>
@@ -22,6 +23,13 @@ public final class ArrayMultiterator<T>
     public Iterator<Values<T>> iterator()
     {
         return new ArrayValuesIterator<>(array, inputSize, windowSize,
+            windowed);
+    }
+
+    @Override
+    public Spliterator<Values<T>> spliterator()
+    {
+        return new ArrayValuesSpliterator<>(array, inputSize, windowSize,
             windowed);
     }
 }

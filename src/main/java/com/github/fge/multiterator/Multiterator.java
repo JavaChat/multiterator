@@ -1,6 +1,7 @@
 package com.github.fge.multiterator;
 
-@FunctionalInterface
+import java.util.stream.Stream;
+
 public interface Multiterator<T>
     extends Iterable<Values<T>>
 {
@@ -8,4 +9,6 @@ public interface Multiterator<T>
     {
         return new MultiteratorBuilder(windowSize);
     }
+
+    Stream<Values<T>> stream();
 }

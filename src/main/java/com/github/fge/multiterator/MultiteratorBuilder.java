@@ -38,7 +38,7 @@ public final class MultiteratorBuilder
         return new ListMultiterator<>(list,  windowSize, windowed);
     }
 
-    public <T> Multiterator<T> over(final T... array)
+    public <T> Multiterator<T> over(final T[] array)
     {
         checkSize(array.length);
         return new ArrayMultiterator<>(array, windowSize, windowed);

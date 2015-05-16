@@ -5,6 +5,7 @@ import com.github.fge.multiterator.base.MultiteratorBase;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Spliterator;
 
 public final class CollectionMultiterator<T>
     extends MultiteratorBase<T, CollectionValues<T>>
@@ -25,5 +26,13 @@ public final class CollectionMultiterator<T>
         final Iterator<T> iterator = collection.iterator();
         return new CollectionValuesIterator<>(iterator, inputSize, windowSize,
             windowed);
+    }
+
+    @Override
+    public Spliterator<Values<T>> spliterator()
+    {
+        final Iterator<T> iterator = collection.iterator();
+        return new CollectionValuesSpliterator<>(iterator, inputSize,
+            windowSize, windowed);
     }
 }
