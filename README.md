@@ -50,7 +50,7 @@ for (final Values<Integer> values: multiterator)
 
 // Java 8 style of the above:
 multiterator.forEach(
-    values -> System.out.printf(""%d, %d\n", values.get(0), values.get(1))
+    values -> System.out.printf("%d, %d\n", values.get(0), values.get(1))
 );
 
 // A window-shifting multiterator
@@ -68,7 +68,7 @@ for (final Values<Integer> values: multiterator)
 
 // Java 8 style of the above:
 multiterator.forEach(
-    values -> System.out.printf(""%d, %d\n", values.get(0), values.get(1))
+    values -> System.out.printf("%d, %d\n", values.get(0), values.get(1))
 );
 ```
 
