@@ -1,15 +1,12 @@
-// Breaks with gradle 2.4??
-//buildscript {
-//    repositories {
-//        maven {
-//            mavenCentral();
-//        }
-//    }
-//    dependencies {
-//        classpath(group: "info.solidsoft.gradle.pitest",
-//            name: "gradle-pitest-plugin", version: "1.1.4");
-//    }
-//};
+buildscript {
+    repositories {
+        mavenCentral();
+    }
+    dependencies {
+        classpath(group: "info.solidsoft.gradle.pitest",
+            name: "gradle-pitest-plugin", version: "1.1.4");
+    }
+};
 
 apply(plugin: "java");
 apply(plugin: "maven");
@@ -17,7 +14,7 @@ apply(plugin: "signing");
 apply(plugin: "osgi");
 apply(plugin: "idea");
 apply(plugin: "eclipse");
-//apply(plugin: "info.solidsoft.pitest");
+apply(plugin: "info.solidsoft.pitest");
 
 group = "com.github.fge";
 version = "0.1.0-SNAPSHOT";
