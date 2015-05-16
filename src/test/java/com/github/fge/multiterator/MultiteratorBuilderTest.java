@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.shouldHaveThrown;
 
-public class MultiteratorBuilderTest
+public final class MultiteratorBuilderTest
 {
     @Test
     public void windowSizeTest()
