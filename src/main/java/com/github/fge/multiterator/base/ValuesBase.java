@@ -35,6 +35,12 @@ public abstract class ValuesBase<T, V extends ValuesBase<T, V>>
 
     protected abstract T doGet(int index);
 
+    @Override
+    public final int size()
+    {
+        return windowSize;
+    }
+
     public final boolean hasNext()
     {
         return offset + windowSize < inputSize;
