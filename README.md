@@ -7,6 +7,10 @@ The choice of the license is left to the user of this package.
 
 This package requires **Java 8**.
 
+## Versions
+
+None yet!
+
 ## What this is
 
 This package implements "multivalued" iterators over `Collection`s. There are
