@@ -87,5 +87,7 @@ final Multiterator<Integer> multiterator = Multiterator.ofSize(2)
 ## Future plans
 
 * Stream support.
+* `{Long,Double,Int}Multiterator for primitive arrays (wrap `char[]` into `Int*`
+  and `float` into `Double*`
 * Others! Open to ideas...
 
