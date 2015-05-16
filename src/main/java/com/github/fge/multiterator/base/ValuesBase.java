@@ -75,7 +75,7 @@ public abstract class ValuesBase<T, V extends ValuesBase<T, V>>
     @Override
     public final String toString()
     {
-        return stream().map(Object::toString)
-            .collect(Collectors.joining(", "));
+        return '<' + stream().map(Object::toString)
+            .collect(Collectors.joining(", ")) + '>';
     }
 }
