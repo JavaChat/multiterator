@@ -1,5 +1,9 @@
 package com.github.fge.multiterator;
 
+import com.github.fge.multiterator.collection.CollectionMultiterator;
+
+import java.util.Collection;
+
 public final class MultiteratorBuilder
 {
     private final int windowSize;
@@ -7,6 +11,9 @@ public final class MultiteratorBuilder
 
     MultiteratorBuilder(final int windowSize)
     {
+        if (windowSize <= 0)
+            throw new IllegalArgumentException("window size must be strictly"
+                + " positive");
         this.windowSize = windowSize;
     }
 
@@ -16,13 +23,16 @@ public final class MultiteratorBuilder
         return this;
     }
 
-    public int getWindowSize()
+    public <T> Multiterator<T> over(final Collection<T> collection)
     {
-        return windowSize;
-    }
-
-    public boolean isWindowed()
-    {
-        return windowed;
+        final int size = collection.size();
+        if (size < windowSize)
+            throw new IllegalArgumentException("size of collection (" + size
+                + ") is lower than requested window size (" + windowSize + ')');
+        if (windowed && size % windowSize != 0)
+            throw new IllegalArgumentException("size of collection (" + size
+                + ") is not a multiple of requested window size (" + windowSize
+                + ')');
+        return new CollectionMultiterator<>(collection, windowSize, windowed);
     }
 }
