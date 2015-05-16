@@ -1,0 +1,16 @@
+package com.github.fge.multiterator.ints;
+
+import java.util.Iterator;
+import java.util.stream.Stream;
+
+public interface IntMultiterator
+    extends Iterable<IntValues>
+{
+    Stream<IntValues> stream();
+
+    @Override
+    default Iterator<IntValues> iterator()
+    {
+        return stream().iterator();
+    }
+}
