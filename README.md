@@ -74,7 +74,6 @@ multiterator.forEach(
 
 ## Future plans
 
-* Make an optimized version for `List`s.
 * Make `Multiterator<T>` implement `Stream<Values<T>>`.
 * Others! Open to ideas...
 

@@ -1,8 +1,10 @@
 package com.github.fge.multiterator;
 
 import com.github.fge.multiterator.collection.CollectionMultiterator;
+import com.github.fge.multiterator.list.ListMultiterator;
 
 import java.util.Collection;
+import java.util.List;
 
 public final class MultiteratorBuilder
 {
@@ -25,7 +27,18 @@ public final class MultiteratorBuilder
 
     public <T> Multiterator<T> over(final Collection<T> collection)
     {
-        final int size = collection.size();
+        checkSize(collection.size());
+        return new CollectionMultiterator<>(collection, windowSize, windowed);
+    }
+
+    public <T> Multiterator<T> over(final List<T> list)
+    {
+        checkSize(list.size());
+        return new ListMultiterator<>(list,  windowSize, windowed);
+    }
+
+    private void checkSize(final int size)
+    {
         if (size < windowSize)
             throw new IllegalArgumentException("size of collection (" + size
                 + ") is lower than requested window size (" + windowSize + ')');
@@ -33,6 +46,5 @@ public final class MultiteratorBuilder
             throw new IllegalArgumentException("size of collection (" + size
                 + ") is not a multiple of requested window size (" + windowSize
                 + ')');
-        return new CollectionMultiterator<>(collection, windowSize, windowed);
     }
 }

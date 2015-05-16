@@ -1,11 +1,11 @@
-package com.github.fge.multiterator.collection;
+package com.github.fge.multiterator.list;
 
 import com.github.fge.multiterator.Multiterator;
 import com.github.fge.multiterator.Values;
 import org.testng.annotations.Test;
 
-import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -13,19 +13,19 @@ import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public final class CollectionMultiteratorTest
+public final class ListMultiteratorTest
 {
     @Test
     public void shiftIterationTest()
     {
-        final Collection<Integer> list = IntStream.rangeClosed(0, 2)
+        final List<Integer> list = IntStream.rangeClosed(0, 2)
             .boxed()
             .collect(Collectors.toList());
 
         final Multiterator<Integer> multiterator = Multiterator.ofSize(2)
             .over(list);
 
-        assertThat(multiterator).isInstanceOf(CollectionMultiterator.class);
+        assertThat(multiterator).isInstanceOf(ListMultiterator.class);
 
         final Iterator<Values<Integer>> iterator = multiterator.iterator();
         Values<Integer> values;
@@ -53,14 +53,14 @@ public final class CollectionMultiteratorTest
     @Test
     public void windowIterationTest()
     {
-        final Collection<Integer> list = IntStream.rangeClosed(0, 3)
+        final List<Integer> list = IntStream.rangeClosed(0, 3)
             .boxed()
             .collect(Collectors.toList());
 
         final Multiterator<Integer> multiterator = Multiterator.ofSize(2)
             .windowed().over(list);
 
-        assertThat(multiterator).isInstanceOf(CollectionMultiterator.class);
+        assertThat(multiterator).isInstanceOf(ListMultiterator.class);
 
         final Iterator<Values<Integer>> iterator = multiterator.iterator();
         Values<Integer> values;
