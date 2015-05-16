@@ -1,45 +1,25 @@
 package com.github.fge.multiterator.array;
 
-import com.github.fge.multiterator.Values;
+import com.github.fge.multiterator.base.ValuesIteratorBase;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
 import java.util.function.UnaryOperator;
 
 final class ArrayValuesIterator<T>
-    implements Iterator<Values<T>>
+    extends ValuesIteratorBase<T, ArrayValues<T>>
 {
     private final T[] array;
-    private final int listSize;
-    private final int windowSize;
-    private final UnaryOperator<ArrayValues<T>> operator;
-
-    private ArrayValues<T> currentValue;
 
     @SuppressWarnings("AssignmentToCollectionOrArrayFieldFromParameter")
-    ArrayValuesIterator(final T[] array, final int listSize,
+    ArrayValuesIterator(final T[] array, final int inputSize,
         final int windowSize, final UnaryOperator<ArrayValues<T>> operator)
     {
+        super(inputSize, windowSize, operator);
         this.array = array;
-        this.listSize = listSize;
-        this.windowSize = windowSize;
-        this.operator = operator;
     }
 
     @Override
-    public boolean hasNext()
+    protected ArrayValues<T> initialValue()
     {
-        return currentValue == null || currentValue.hasNext();
-    }
-
-    @Override
-    public Values<T> next()
-    {
-        if (!hasNext())
-            throw new NoSuchElementException();
-        currentValue = currentValue == null
-            ? new ArrayValues<>(array, listSize, windowSize)
-            : operator.apply(currentValue);
-        return currentValue;
+        return new ArrayValues<>(array, inputSize, windowSize);
     }
 }
