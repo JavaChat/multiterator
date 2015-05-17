@@ -7,7 +7,7 @@ import java.util.Spliterator;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-public abstract class MultiteratorBase<T, V extends ValuesBase<T, V>>
+public abstract class MultiteratorBase<T>
     implements Multiterator<T>
 {
     protected final int inputSize;

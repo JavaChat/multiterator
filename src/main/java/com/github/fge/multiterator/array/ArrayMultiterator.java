@@ -6,7 +6,7 @@ import com.github.fge.multiterator.base.MultiteratorBase;
 import java.util.Spliterator;
 
 public final class ArrayMultiterator<T>
-    extends MultiteratorBase<T, ArrayValues<T>>
+    extends MultiteratorBase<T>
 {
     private final T[] array;
 

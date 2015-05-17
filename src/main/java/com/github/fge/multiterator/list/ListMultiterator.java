@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Spliterator;
 
 public final class ListMultiterator<T>
-    extends MultiteratorBase<T, ListValues<T>>
+    extends MultiteratorBase<T>
 {
     private final List<T> list;
 

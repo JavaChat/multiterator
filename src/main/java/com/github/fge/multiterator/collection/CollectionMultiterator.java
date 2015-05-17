@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.Spliterator;
 
 public final class CollectionMultiterator<T>
-    extends MultiteratorBase<T, CollectionValues<T>>
+    extends MultiteratorBase<T>
 {
     private final Collection<T> collection;
 
