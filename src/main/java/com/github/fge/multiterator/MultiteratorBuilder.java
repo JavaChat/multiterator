@@ -2,6 +2,8 @@ package com.github.fge.multiterator;
 
 import com.github.fge.multiterator.generic.array.ArrayMultiterator;
 import com.github.fge.multiterator.generic.collection.CollectionMultiterator;
+import com.github.fge.multiterator.primitives.doubles.direct
+    .DirectDoubleMultiterator;
 import com.github.fge.multiterator.primitives.ints.asis.IntMultiteratorAsIs;
 import com.github.fge.multiterator.primitives.ints.fromchars.IntMultiteratorFromChars;
 import com.github.fge.multiterator.generic.list.ListMultiterator;
@@ -9,6 +11,7 @@ import com.github.fge.multiterator.generic.list.ListMultiterator;
 import java.util.Collection;
 import java.util.List;
 
+@SuppressWarnings("MethodCanBeVariableArityMethod")
 public final class MultiteratorBuilder
 {
     private final int windowSize;
@@ -56,6 +59,12 @@ public final class MultiteratorBuilder
     {
         checkSize(array.length);
         return new IntMultiteratorFromChars(array, windowSize, windowed);
+    }
+
+    public DoubleMultiterator over(final double[] array)
+    {
+        checkSize(array.length);
+        return new DirectDoubleMultiterator(array, windowSize, windowed);
     }
 
     private void checkSize(final int size)
