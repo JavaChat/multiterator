@@ -4,6 +4,7 @@ import com.github.fge.multiterator.Values;
 import com.github.fge.multiterator.internal.ValuesCore;
 
 import java.util.Objects;
+import java.util.function.IntPredicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -47,8 +48,10 @@ public abstract class ValuesBase<T, V extends ValuesBase<T, V>>
         if (this == obj)
             return true;
         final V other = (V) obj;
-        return windowSize == other.size() && IntStream.range(0, windowSize)
-            .allMatch(i -> Objects.equals(get(i), other.get(i)));
+        final IntPredicate predicate
+            = index -> Objects.equals(get(index), other.get(index));
+        return windowSize == other.size()
+            && IntStream.range(0, windowSize).allMatch(predicate);
     }
 
     @Override

@@ -33,13 +33,4 @@ public abstract class ValuesCore<V extends ValuesCore<V>>
     public abstract V shift();
 
     public abstract V nextWindow();
-
-    @Override
-    public abstract int hashCode();
-
-    @Override
-    public abstract boolean equals(Object obj);
-
-    @Override
-    public abstract String toString();
 }

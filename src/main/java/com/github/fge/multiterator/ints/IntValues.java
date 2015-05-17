@@ -18,6 +18,8 @@ public interface IntValues
         return get(1);
     }
 
+    int size();
+
     IntStream stream();
 
     @Override
@@ -25,4 +27,13 @@ public interface IntValues
     {
         return stream().boxed().iterator();
     }
+
+    @Override
+    int hashCode();
+
+    @Override
+    boolean equals(Object obj);
+
+    @Override
+    String toString();
 }

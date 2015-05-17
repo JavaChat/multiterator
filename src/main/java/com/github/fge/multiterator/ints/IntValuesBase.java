@@ -2,7 +2,7 @@ package com.github.fge.multiterator.ints;
 
 import com.github.fge.multiterator.internal.ValuesCore;
 
-import java.util.function.IntUnaryOperator;
+import java.util.function.IntPredicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -25,17 +25,21 @@ abstract class IntValuesBase<V extends IntValuesBase<V>>
     {
         if (index >= windowSize)
             throw new IndexOutOfBoundsException();
-        return intAt().applyAsInt(index);
+        return doGet(index);
     }
 
-    public abstract IntUnaryOperator intAt();
+    protected abstract int doGet(final int index);
+
+    @Override
+    public final IntStream stream()
+    {
+        return IntStream.range(0, windowSize).map(this::doGet);
+    }
 
     @Override
     public final int hashCode()
     {
-        return IntStream.range(offset, offset + windowSize)
-            .map(this::get)
-            .reduce(1, (x, y) -> 31 * x + y);
+        return stream().reduce(1, (x, y) -> 31 * x + y);
     }
 
     @Override
@@ -46,16 +50,16 @@ abstract class IntValuesBase<V extends IntValuesBase<V>>
         if (this == obj)
             return true;
         final IntValues other = (IntValues) obj;
-        return IntStream.range(0, windowSize). allMatch(
-            index -> get(index) == other.get(index)
-        );
+        final IntPredicate predicate
+            = index -> get(index) == other.get(index);
+        return windowSize == other.size()
+            && IntStream.range(0, windowSize).allMatch(predicate);
     }
 
     @Override
     public final String toString()
     {
-        return '<' + IntStream.range(0, windowSize).map(this::get)
-            .mapToObj(Integer::toString).collect(Collectors.joining(", "))
-            + '>';
+        return '<' + stream().mapToObj(Integer::toString)
+            .collect(Collectors.joining(", ")) + '>';
     }
 }

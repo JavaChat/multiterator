@@ -1,9 +1,5 @@
 package com.github.fge.multiterator.ints;
 
-import java.util.Arrays;
-import java.util.function.IntUnaryOperator;
-import java.util.stream.IntStream;
-
 final class IntValuesAsIs
     extends IntValuesBase<IntValuesAsIs>
 {
@@ -23,9 +19,9 @@ final class IntValuesAsIs
     }
 
     @Override
-    public IntUnaryOperator intAt()
+    public int doGet(final int index)
     {
-        return index -> array[offset + index];
+        return array[offset + index];
     }
 
     @Override
@@ -38,21 +34,5 @@ final class IntValuesAsIs
     public IntValuesAsIs nextWindow()
     {
         return new IntValuesAsIs(this, offset + windowSize);
-    }
-
-    @Override
-    public IntStream stream()
-    {
-        final int[] subArray
-            = Arrays.copyOfRange(array, offset, offset + windowSize);
-        return Arrays.stream(subArray);
-    }
-
-    public static void main(final String... args)
-    {
-        final int[] source = new int[] { 4, 298, 63, 938, 99, -6387, 34 };
-        final IntValues values = new IntValuesAsIs(source, 7, 3);
-
-        values.stream().mapToObj(Integer::toString).forEach(System.out::println);
     }
 }

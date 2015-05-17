@@ -18,6 +18,8 @@ public interface Values<T>
         return get(1);
     }
 
+    int size();
+
     Stream<T> stream();
 
     @Override
@@ -31,4 +33,7 @@ public interface Values<T>
 
     @Override
     boolean equals(Object obj);
+
+    @Override
+    String toString();
 }
