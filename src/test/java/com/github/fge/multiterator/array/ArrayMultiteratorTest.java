@@ -7,7 +7,7 @@ import com.github.fge.multiterator.MultiteratorTest;
 import java.util.stream.Stream;
 
 public final class ArrayMultiteratorTest
-    extends MultiteratorTest<ArrayMultiterator<Integer>>
+    extends MultiteratorTest
 {
     public ArrayMultiteratorTest()
     {

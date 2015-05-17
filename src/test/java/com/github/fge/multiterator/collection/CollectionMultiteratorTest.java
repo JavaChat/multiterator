@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public final class CollectionMultiteratorTest
-    extends MultiteratorTest<CollectionMultiterator<Integer>>
+    extends MultiteratorTest
 {
     public CollectionMultiteratorTest()
     {

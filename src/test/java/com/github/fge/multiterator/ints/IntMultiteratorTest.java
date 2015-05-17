@@ -1,38 +1,37 @@
-package com.github.fge.multiterator;
+package com.github.fge.multiterator.ints;
 
+import com.github.fge.multiterator.Multiterator;
+import com.github.fge.multiterator.MultiteratorBuilder;
 import org.testng.annotations.Test;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.shouldHaveThrown;
 
-public abstract class MultiteratorTest
+public abstract class IntMultiteratorTest
 {
     private final Class<?> expectedClass;
 
-    protected MultiteratorTest(final Class<?> expectedClass)
+    protected IntMultiteratorTest(final Class<?> expectedClass)
     {
         this.expectedClass = expectedClass;
     }
 
-    protected abstract Multiterator<Integer> getMultiterator(
-        final MultiteratorBuilder builder, final Stream<Integer> stream);
+    protected abstract IntMultiterator getMultiterator(
+        final MultiteratorBuilder builder, final IntStream stream);
 
     @Test
     public final void classTest()
     {
-        final Stream<Integer> stream = IntStream.range(0, 3).boxed();
+        final IntStream stream = IntStream.range(0, 3);
         final MultiteratorBuilder builder = Multiterator.ofSize(2);
-        final Multiterator<Integer> multiterator
-            = getMultiterator(builder, stream);
+        final IntMultiterator multiterator = getMultiterator(builder, stream);
 
         assertThat(multiterator).isExactlyInstanceOf(expectedClass);
     }
@@ -40,8 +39,7 @@ public abstract class MultiteratorTest
     @Test
     public void undersizedCollectionTest()
     {
-        final Stream<Integer> stream
-            = Collections.<Integer>emptyList().stream();
+        final IntStream stream = IntStream.of();
 
         try {
             getMultiterator(Multiterator.ofSize(1), stream);
@@ -55,8 +53,7 @@ public abstract class MultiteratorTest
     @Test
     public void incorrectCollectionSizeForWindowTest()
     {
-        final Stream<Integer> stream = IntStream.range(0, 5)
-            .boxed();
+        final IntStream stream = IntStream.range(0, 5);
 
         try {
             getMultiterator(Multiterator.ofSize(2).windowed(), stream);
@@ -70,19 +67,18 @@ public abstract class MultiteratorTest
     @Test
     public final void streamShiftTest()
     {
-        final Stream<Integer> stream = IntStream.range(0, 3).boxed();
+        final IntStream stream = IntStream.range(0, 3);
         final MultiteratorBuilder builder = Multiterator.ofSize(2);
-        final Multiterator<Integer> multiterator
-            = getMultiterator(builder, stream);
+        final IntMultiterator multiterator = getMultiterator(builder, stream);
 
-        final List<Values<Integer>> list = multiterator.stream()
+        final List<IntValues> list = multiterator.stream()
             .collect(Collectors.toList());
 
         assertThat(list).hasSize(2);
 
-        final Iterator<Values<Integer>> iterator = list.iterator();
+        final Iterator<IntValues> iterator = list.iterator();
 
-        Values<Integer> values;
+        IntValues values;
 
         assertThat(iterator.hasNext()).isTrue();
 
@@ -107,19 +103,18 @@ public abstract class MultiteratorTest
     @Test
     public final void streamWindowedTest()
     {
-        final Stream<Integer> stream = IntStream.range(0, 4).boxed();
+        final IntStream stream = IntStream.range(0, 4);
         final MultiteratorBuilder builder = Multiterator.ofSize(2).windowed();
-        final Multiterator<Integer> multiterator
-            = getMultiterator(builder, stream);
+        final IntMultiterator multiterator = getMultiterator(builder, stream);
 
-        final List<Values<Integer>> list = multiterator.stream()
+        final List<IntValues> list = multiterator.stream()
             .collect(Collectors.toList());
 
         assertThat(list).hasSize(2);
 
-        final Iterator<Values<Integer>> iterator = list.iterator();
+        final Iterator<IntValues> iterator = list.iterator();
 
-        Values<Integer> values;
+        IntValues values;
 
         assertThat(iterator.hasNext());
 

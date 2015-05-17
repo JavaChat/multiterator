@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public final class ListMultiteratorTest
-    extends MultiteratorTest<ListMultiterator<Integer>>
+    extends MultiteratorTest
 {
     public ListMultiteratorTest()
     {

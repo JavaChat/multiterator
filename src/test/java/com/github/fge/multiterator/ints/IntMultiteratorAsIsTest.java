@@ -1,0 +1,21 @@
+package com.github.fge.multiterator.ints;
+
+import com.github.fge.multiterator.MultiteratorBuilder;
+
+import java.util.stream.IntStream;
+
+public final class IntMultiteratorAsIsTest
+    extends IntMultiteratorTest
+{
+    public IntMultiteratorAsIsTest()
+    {
+        super(IntMultiteratorAsIs.class);
+    }
+
+    @Override
+    protected IntMultiterator getMultiterator(final MultiteratorBuilder builder,
+        final IntStream stream)
+    {
+        return builder.over(stream.toArray());
+    }
+}
