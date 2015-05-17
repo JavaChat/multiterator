@@ -4,6 +4,7 @@ import com.github.fge.multiterator.array.ArrayMultiterator;
 import com.github.fge.multiterator.collection.CollectionMultiterator;
 import com.github.fge.multiterator.ints.IntMultiterator;
 import com.github.fge.multiterator.ints.IntMultiteratorAsIs;
+import com.github.fge.multiterator.ints.IntMultiteratorFromChars;
 import com.github.fge.multiterator.list.ListMultiterator;
 
 import java.util.Collection;
@@ -50,6 +51,12 @@ public final class MultiteratorBuilder
     {
         checkSize(array.length);
         return new IntMultiteratorAsIs(array, windowSize, windowed);
+    }
+
+    public IntMultiterator over(final char[] array)
+    {
+        checkSize(array.length);
+        return new IntMultiteratorFromChars(array, windowSize, windowed);
     }
 
     private void checkSize(final int size)
