@@ -1,7 +1,7 @@
 package com.github.fge.multiterator.primitives.ints;
 
 import com.github.fge.multiterator.IntValues;
-import com.github.fge.multiterator.primitives.ints.asis.IntValuesAsIs;
+import com.github.fge.multiterator.primitives.ints.direct.DirectIntValues;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -10,13 +10,13 @@ import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.shouldHaveThrown;
 
-public final class IntValuesAsIsTest
+public final class DirectIntValuesTest
 {
     @Test
     public void initialValuesTest()
     {
         final int[] array = IntStream.range(0, 4).toArray();
-        final IntValues values = new IntValuesAsIs(array, array.length, 2);
+        final IntValues values = new DirectIntValues(array, array.length, 2);
 
         assertThat(values.get(0)).isEqualTo(0);
         assertThat(values.get(1)).isEqualTo(1);
@@ -44,14 +44,14 @@ public final class IntValuesAsIsTest
     @Test
     public void shiftTest()
     {
-        IntValuesAsIs values;
+        DirectIntValues values;
         IntStream stream;
         int[] actual;
         int[] expected;
 
 
         final int[] array = IntStream.range(0, 4).toArray();
-        values = new IntValuesAsIs(array, array.length, 2).shift();
+        values = new DirectIntValues(array, array.length, 2).shift();
 
         assertThat(values.get(0)).isEqualTo(1);
         assertThat(values.get(1)).isEqualTo(2);
@@ -85,13 +85,13 @@ public final class IntValuesAsIsTest
     @Test
     public void windowedTest()
     {
-        IntValuesAsIs values;
+        DirectIntValues values;
         IntStream stream;
         int[] actual;
         int[] expected;
 
         final int[] array = IntStream.range(0, 6).toArray();
-        values = new IntValuesAsIs(array, array.length, 2).nextWindow();
+        values = new DirectIntValues(array, array.length, 2).nextWindow();
 
         assertThat(values.get(0)).isEqualTo(2);
         assertThat(values.get(1)).isEqualTo(3);

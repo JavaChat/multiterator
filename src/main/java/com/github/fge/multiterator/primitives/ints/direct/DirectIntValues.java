@@ -1,23 +1,23 @@
-package com.github.fge.multiterator.primitives.ints.asis;
+package com.github.fge.multiterator.primitives.ints.direct;
 
 import com.github.fge.multiterator.core.VisibleForTesting;
 import com.github.fge.multiterator.primitives.ints.IntValuesBase;
 
 @VisibleForTesting
-public final class IntValuesAsIs
-    extends IntValuesBase<IntValuesAsIs>
+public final class DirectIntValues
+    extends IntValuesBase<DirectIntValues>
 {
     private final int[] array;
 
     @SuppressWarnings("AssignmentToCollectionOrArrayFieldFromParameter")
-    public IntValuesAsIs(final int[] array, final int inputSize,
+    public DirectIntValues(final int[] array, final int inputSize,
         final int windowSize)
     {
         super(inputSize, windowSize);
         this.array = array;
     }
 
-    private IntValuesAsIs(final IntValuesAsIs prev, final int offset)
+    private DirectIntValues(final DirectIntValues prev, final int offset)
     {
         super(prev, offset);
         array = prev.array;
@@ -30,14 +30,14 @@ public final class IntValuesAsIs
     }
 
     @Override
-    public IntValuesAsIs shift()
+    public DirectIntValues shift()
     {
-        return new IntValuesAsIs(this, offset + 1);
+        return new DirectIntValues(this, offset + 1);
     }
 
     @Override
-    public IntValuesAsIs nextWindow()
+    public DirectIntValues nextWindow()
     {
-        return new IntValuesAsIs(this, offset + windowSize);
+        return new DirectIntValues(this, offset + windowSize);
     }
 }

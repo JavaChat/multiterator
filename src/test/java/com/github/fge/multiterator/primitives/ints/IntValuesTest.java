@@ -1,7 +1,7 @@
 package com.github.fge.multiterator.primitives.ints;
 
 import com.github.fge.multiterator.IntValues;
-import com.github.fge.multiterator.primitives.ints.asis.IntValuesAsIs;
+import com.github.fge.multiterator.primitives.ints.direct.DirectIntValues;
 import com.github.fge.multiterator.primitives.ints.fromchars.IntValuesFromChars;
 import org.assertj.core.api.AutoCloseableSoftAssertions;
 import org.testng.annotations.Test;
@@ -18,7 +18,7 @@ public final class IntValuesTest
         final int[] ints = IntStream.range(0, 5).toArray();
         final char[] chars = { 0, 1, 2, 3, 4, 5 };
 
-        final IntValues asIs = new IntValuesAsIs(ints, 6, 4);
+        final IntValues asIs = new DirectIntValues(ints, 6, 4);
         final IntValues fromChars = new IntValuesFromChars(chars, 6, 4);
 
         try (

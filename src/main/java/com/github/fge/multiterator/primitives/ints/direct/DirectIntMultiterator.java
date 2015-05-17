@@ -1,16 +1,16 @@
-package com.github.fge.multiterator.primitives.ints.asis;
+package com.github.fge.multiterator.primitives.ints.direct;
 
 import com.github.fge.multiterator.primitives.ints.IntMultiteratorBase;
 import com.github.fge.multiterator.IntValues;
 
 import java.util.Spliterator;
 
-public final class IntMultiteratorAsIs
+public final class DirectIntMultiterator
     extends IntMultiteratorBase
 {
     private final int[] array;
 
-    public IntMultiteratorAsIs(final int[] array , final int windowSize,
+    public DirectIntMultiterator(final int[] array, final int windowSize,
         final boolean windowed)
     {
         super(array.length, windowSize, windowed);
@@ -20,7 +20,7 @@ public final class IntMultiteratorAsIs
     @Override
     public Spliterator<IntValues> spliterator()
     {
-        return new IntValuesSpliteratorAsIs(array, inputSize, windowSize,
+        return new DirectIntValuesSpliterator(array, inputSize, windowSize,
             windowed);
     }
 }

@@ -6,7 +6,7 @@ import com.github.fge.multiterator.primitives.doubles.direct
     .DirectDoubleMultiterator;
 import com.github.fge.multiterator.primitives.doubles.fromfloats
     .DoubleFromFloatsMultiterator;
-import com.github.fge.multiterator.primitives.ints.asis.IntMultiteratorAsIs;
+import com.github.fge.multiterator.primitives.ints.direct.DirectIntMultiterator;
 import com.github.fge.multiterator.primitives.ints.fromchars.IntMultiteratorFromChars;
 import com.github.fge.multiterator.generic.list.ListMultiterator;
 
@@ -54,7 +54,7 @@ public final class MultiteratorBuilder
     public IntMultiterator over(final int[] array)
     {
         checkSize(array.length);
-        return new IntMultiteratorAsIs(array, windowSize, windowed);
+        return new DirectIntMultiterator(array, windowSize, windowed);
     }
 
     public IntMultiterator over(final char[] array)
