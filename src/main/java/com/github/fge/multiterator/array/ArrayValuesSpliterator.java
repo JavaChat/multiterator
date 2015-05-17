@@ -1,9 +1,9 @@
 package com.github.fge.multiterator.array;
 
-import com.github.fge.multiterator.base.ValuesSpliteratorBase;
+import com.github.fge.multiterator.base.GenericValuesSpliterator;
 
 public final class ArrayValuesSpliterator<T>
-    extends ValuesSpliteratorBase<T, ArrayValues<T>>
+    extends GenericValuesSpliterator<T, ArrayValues<T>>
 {
     private final T[] array;
 

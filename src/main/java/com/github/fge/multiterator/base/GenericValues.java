@@ -8,16 +8,16 @@ import java.util.function.IntPredicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public abstract class ValuesBase<T, V extends ValuesBase<T, V>>
+public abstract class GenericValues<T, V extends GenericValues<T, V>>
     extends ValuesCore<V>
     implements Values<T>
 {
-    protected ValuesBase(final int inputSize, final int windowSize)
+    protected GenericValues(final int inputSize, final int windowSize)
     {
         super(inputSize, windowSize);
     }
 
-    protected ValuesBase(final V prev, final int offset)
+    protected GenericValues(final V prev, final int offset)
     {
         super(prev, offset);
     }

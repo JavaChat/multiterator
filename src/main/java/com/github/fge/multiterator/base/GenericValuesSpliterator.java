@@ -1,40 +1,41 @@
-package com.github.fge.multiterator.ints;
+package com.github.fge.multiterator.base;
 
+import com.github.fge.multiterator.Values;
 import com.github.fge.multiterator.internal.ValuesSpliteratorCore;
 
 import java.util.Spliterator;
 import java.util.function.Consumer;
 
-public abstract class IntValuesSpliteratorBase<V extends IntValuesBase<V>>
+public abstract class GenericValuesSpliterator<T, V extends GenericValues<T, V>>
     extends ValuesSpliteratorCore<V>
-    implements Spliterator<IntValues>
+    implements Spliterator<Values<T>>
 {
-    protected IntValuesSpliteratorBase(final int inputSize,
+    protected GenericValuesSpliterator(final int inputSize,
         final int windowSize, final boolean windowed)
     {
         super(inputSize, windowSize, windowed);
     }
 
     @Override
-    public boolean tryAdvance(final Consumer<? super IntValues> action)
+    public boolean tryAdvance(final Consumer<? super Values<T>> action)
     {
         return doTryAdvance(action);
     }
 
     @Override
-    public final Spliterator<IntValues> trySplit()
+    public Spliterator<Values<T>> trySplit()
     {
         return null;
     }
 
     @Override
-    public final long estimateSize()
+    public long estimateSize()
     {
         return doEstimateSize();
     }
 
     @Override
-    public final int characteristics()
+    public int characteristics()
     {
         return doCharacteristics();
     }

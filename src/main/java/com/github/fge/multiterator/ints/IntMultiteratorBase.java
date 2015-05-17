@@ -1,22 +1,19 @@
 package com.github.fge.multiterator.ints;
 
+import com.github.fge.multiterator.internal.MultiteratorCore;
+
 import java.util.Spliterator;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 public abstract class IntMultiteratorBase
+    extends MultiteratorCore
     implements IntMultiterator
 {
-    protected final int inputSize;
-    protected final int windowSize;
-    protected final boolean windowed;
-
     protected IntMultiteratorBase(final int inputSize, final int windowSize,
         final boolean windowed)
     {
-        this.inputSize = inputSize;
-        this.windowSize = windowSize;
-        this.windowed = windowed;
+        super(inputSize, windowSize, windowed);
     }
 
     @Override

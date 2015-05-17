@@ -1,13 +1,13 @@
 package com.github.fge.multiterator.list;
 
-import com.github.fge.multiterator.base.ValuesBase;
+import com.github.fge.multiterator.base.GenericValues;
 import com.github.fge.multiterator.internal.VisibleForTesting;
 
 import java.util.List;
 import java.util.stream.Stream;
 
 public final class ListValues<T>
-    extends ValuesBase<T, ListValues<T>>
+    extends GenericValues<T, ListValues<T>>
 {
     private final List<T> list;
 

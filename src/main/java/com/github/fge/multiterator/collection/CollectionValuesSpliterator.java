@@ -1,11 +1,11 @@
 package com.github.fge.multiterator.collection;
 
-import com.github.fge.multiterator.base.ValuesSpliteratorBase;
+import com.github.fge.multiterator.base.GenericValuesSpliterator;
 
 import java.util.Iterator;
 
 final class CollectionValuesSpliterator<T>
-    extends ValuesSpliteratorBase<T, CollectionValues<T>>
+    extends GenericValuesSpliterator<T, CollectionValues<T>>
 {
     private final Iterator<T> iterator;
 

@@ -1,6 +1,6 @@
 package com.github.fge.multiterator;
 
-import com.github.fge.multiterator.base.ValuesBase;
+import com.github.fge.multiterator.base.GenericValues;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.shouldHaveThrown;
 
-public abstract class ValuesTest<V extends ValuesBase<Integer, V>>
+public abstract class ValuesTest<V extends GenericValues<Integer, V>>
 {
     protected abstract V getValues(Stream<Integer> stream, int windowSize);
 

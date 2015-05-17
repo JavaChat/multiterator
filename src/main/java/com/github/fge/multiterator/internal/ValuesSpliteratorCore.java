@@ -1,13 +1,10 @@
-package com.github.fge.multiterator.base;
-
-import com.github.fge.multiterator.Values;
+package com.github.fge.multiterator.internal;
 
 import java.util.Spliterator;
 import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
 
-public abstract class ValuesSpliteratorBase<T, V extends ValuesBase<T, V>>
-    implements Spliterator<Values<T>>
+public abstract class ValuesSpliteratorCore<V extends ValuesCore<V>>
 {
     protected final int inputSize;
     protected final int windowSize;
@@ -18,19 +15,18 @@ public abstract class ValuesSpliteratorBase<T, V extends ValuesBase<T, V>>
 
     protected int currentIndex = 0;
 
-    protected ValuesSpliteratorBase(final int inputSize, final int windowSize,
+    protected ValuesSpliteratorCore(final int inputSize, final int windowSize,
         final boolean windowed)
     {
         this.inputSize = inputSize;
         this.windowSize = windowSize;
-        operator = windowed ? ValuesBase::nextWindow : ValuesBase::shift;
+        operator = windowed ? ValuesCore::nextWindow : ValuesCore::shift;
         this.windowed = windowed;
     }
 
     protected abstract V initialValue();
 
-    @Override
-    public boolean tryAdvance(final Consumer<? super Values<T>> action)
+    protected final boolean doTryAdvance(final Consumer<? super V> action)
     {
         if (currentValue != null && !currentValue.hasNext())
             return false;
@@ -42,22 +38,19 @@ public abstract class ValuesSpliteratorBase<T, V extends ValuesBase<T, V>>
         return true;
     }
 
-    @Override
-    public final Spliterator<Values<T>> trySplit()
+    protected final Spliterator<V> doTrySplit()
     {
         return null;
     }
 
-    @Override
-    public final long estimateSize()
+    protected final long doEstimateSize()
     {
         final long ret = inputSize - currentIndex;
         return windowed ? ret / windowSize : ret;
     }
 
-    @Override
-    public final int characteristics()
+    protected final int doCharacteristics()
     {
-        return ORDERED | SIZED | NONNULL;
+        return Spliterator.ORDERED | Spliterator.SIZED | Spliterator.NONNULL;
     }
 }

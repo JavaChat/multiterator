@@ -1,13 +1,13 @@
 package com.github.fge.multiterator.array;
 
-import com.github.fge.multiterator.base.ValuesBase;
+import com.github.fge.multiterator.base.GenericValues;
 import com.github.fge.multiterator.internal.VisibleForTesting;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
 
 public final class ArrayValues<T>
-    extends ValuesBase<T, ArrayValues<T>>
+    extends GenericValues<T, ArrayValues<T>>
 {
     private final T[] array;
 

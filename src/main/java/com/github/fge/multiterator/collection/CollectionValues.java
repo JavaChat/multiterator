@@ -1,6 +1,6 @@
 package com.github.fge.multiterator.collection;
 
-import com.github.fge.multiterator.base.ValuesBase;
+import com.github.fge.multiterator.base.GenericValues;
 import com.github.fge.multiterator.internal.VisibleForTesting;
 
 import java.util.Arrays;
@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public final class CollectionValues<T>
-    extends ValuesBase<T, CollectionValues<T>>
+    extends GenericValues<T, CollectionValues<T>>
 {
     private final Object[] values;
 

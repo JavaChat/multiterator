@@ -1,13 +1,13 @@
 package com.github.fge.multiterator.list;
 
 import com.github.fge.multiterator.Values;
-import com.github.fge.multiterator.base.MultiteratorBase;
+import com.github.fge.multiterator.base.GenericMultiterator;
 
 import java.util.List;
 import java.util.Spliterator;
 
 public final class ListMultiterator<T>
-    extends MultiteratorBase<T>
+    extends GenericMultiterator<T>
 {
     private final List<T> list;
 

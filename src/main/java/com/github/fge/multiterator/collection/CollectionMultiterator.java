@@ -1,14 +1,14 @@
 package com.github.fge.multiterator.collection;
 
 import com.github.fge.multiterator.Values;
-import com.github.fge.multiterator.base.MultiteratorBase;
+import com.github.fge.multiterator.base.GenericMultiterator;
 
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Spliterator;
 
 public final class CollectionMultiterator<T>
-    extends MultiteratorBase<T>
+    extends GenericMultiterator<T>
 {
     private final Collection<T> collection;
 
