@@ -8,13 +8,13 @@ import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.shouldHaveThrown;
 
-public final class IntValuesImplTest
+public final class IntValuesAsIsTest
 {
     @Test
     public void initialValuesTest()
     {
         final int[] array = IntStream.range(0, 4).toArray();
-        final IntValues values = new IntValuesImpl(array, array.length, 2);
+        final IntValues values = new IntValuesAsIs(array, array.length, 2);
 
         assertThat(values.get(0)).isEqualTo(0);
         assertThat(values.get(1)).isEqualTo(1);
@@ -42,14 +42,14 @@ public final class IntValuesImplTest
     @Test
     public void shiftTest()
     {
-        IntValuesImpl values;
+        IntValuesAsIs values;
         IntStream stream;
         int[] actual;
         int[] expected;
 
 
         final int[] array = IntStream.range(0, 4).toArray();
-        values = new IntValuesImpl(array, array.length, 2).shift();
+        values = new IntValuesAsIs(array, array.length, 2).shift();
 
         assertThat(values.get(0)).isEqualTo(1);
         assertThat(values.get(1)).isEqualTo(2);
@@ -83,13 +83,13 @@ public final class IntValuesImplTest
     @Test
     public void windowedTest()
     {
-        IntValuesImpl values;
+        IntValuesAsIs values;
         IntStream stream;
         int[] actual;
         int[] expected;
 
         final int[] array = IntStream.range(0, 6).toArray();
-        values = new IntValuesImpl(array, array.length, 2).nextWindow();
+        values = new IntValuesAsIs(array, array.length, 2).nextWindow();
 
         assertThat(values.get(0)).isEqualTo(2);
         assertThat(values.get(1)).isEqualTo(3);

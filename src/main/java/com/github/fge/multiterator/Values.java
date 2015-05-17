@@ -18,8 +18,6 @@ public interface Values<T>
         return get(1);
     }
 
-    int size();
-
     Stream<T> stream();
 
     @Override

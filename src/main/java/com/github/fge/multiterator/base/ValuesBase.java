@@ -1,30 +1,24 @@
 package com.github.fge.multiterator.base;
 
 import com.github.fge.multiterator.Values;
+import com.github.fge.multiterator.internal.ValuesCore;
 
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public abstract class ValuesBase<T, V extends ValuesBase<T, V>>
+    extends ValuesCore<V>
     implements Values<T>
 {
-    protected final int inputSize;
-    protected final int windowSize;
-    protected final int offset;
-
     protected ValuesBase(final int inputSize, final int windowSize)
     {
-        this.inputSize = inputSize;
-        this.windowSize = windowSize;
-        offset = 0;
+        super(inputSize, windowSize);
     }
 
     protected ValuesBase(final V prev, final int offset)
     {
-        inputSize = prev.inputSize;
-        windowSize = prev.windowSize;
-        this.offset = offset;
+        super(prev, offset);
     }
 
     @Override
@@ -36,21 +30,6 @@ public abstract class ValuesBase<T, V extends ValuesBase<T, V>>
     }
 
     protected abstract T doGet(int index);
-
-    @Override
-    public final int size()
-    {
-        return windowSize;
-    }
-
-    public final boolean hasNext()
-    {
-        return offset + windowSize < inputSize;
-    }
-
-    public abstract V shift();
-
-    public abstract V nextWindow();
 
     @Override
     public final int hashCode()
@@ -67,7 +46,7 @@ public abstract class ValuesBase<T, V extends ValuesBase<T, V>>
             return false; // also takes care of obj == null
         if (this == obj)
             return true;
-        final Values<T> other = (Values<T>) obj;
+        final V other = (V) obj;
         return windowSize == other.size() && IntStream.range(0, windowSize)
             .allMatch(i -> Objects.equals(get(i), other.get(i)));
     }
