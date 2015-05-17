@@ -1,58 +1,55 @@
-package com.github.fge.multiterator.ints;
+package com.github.fge.multiterator.generic;
 
-import com.github.fge.multiterator.IntValues;
+import com.github.fge.multiterator.Values;
 import com.github.fge.multiterator.core.ValuesCore;
 
+import java.util.Objects;
 import java.util.function.IntPredicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public abstract class IntValuesBase<V extends IntValuesBase<V>>
+public abstract class GenericValues<T, V extends GenericValues<T, V>>
     extends ValuesCore<V>
-    implements IntValues
+    implements Values<T>
 {
-    protected IntValuesBase(final int inputSize, final int windowSize)
+    protected GenericValues(final int inputSize, final int windowSize)
     {
         super(inputSize, windowSize);
     }
 
-    protected IntValuesBase(final V prev, final int offset)
+    protected GenericValues(final V prev, final int offset)
     {
         super(prev, offset);
     }
 
     @Override
-    public final int get(final int index)
+    public T get(final int index)
     {
         if (index >= windowSize)
             throw new IndexOutOfBoundsException();
         return doGet(index);
     }
 
-    protected abstract int doGet(final int index);
-
-    @Override
-    public final IntStream stream()
-    {
-        return IntStream.range(0, windowSize).map(this::doGet);
-    }
+    protected abstract T doGet(int index);
 
     @Override
     public final int hashCode()
     {
-        return stream().reduce(1, (x, y) -> 31 * x + y);
+        return stream().mapToInt(Objects::hashCode)
+            .reduce(1, (x, y) -> 31 * x + y);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public final boolean equals(final Object obj)
     {
-        if (!(obj instanceof IntValues))
+        if (!(obj instanceof Values))
             return false; // also takes care of obj == null
         if (this == obj)
             return true;
-        final IntValues other = (IntValues) obj;
+        final V other = (V) obj;
         final IntPredicate predicate
-            = index -> get(index) == other.get(index);
+            = index -> Objects.equals(get(index), other.get(index));
         return windowSize == other.size()
             && IntStream.range(0, windowSize).allMatch(predicate);
     }
@@ -60,7 +57,7 @@ public abstract class IntValuesBase<V extends IntValuesBase<V>>
     @Override
     public final String toString()
     {
-        return '<' + stream().mapToObj(Integer::toString)
+        return '<' + stream().map(Object::toString)
             .collect(Collectors.joining(", ")) + '>';
     }
 }

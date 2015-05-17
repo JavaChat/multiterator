@@ -1,6 +1,6 @@
 package com.github.fge.multiterator;
 
-import com.github.fge.multiterator.base.GenericValues;
+import com.github.fge.multiterator.generic.GenericValues;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;

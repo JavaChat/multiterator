@@ -1,7 +1,7 @@
 package com.github.fge.multiterator.ints.fromchars;
 
 import com.github.fge.multiterator.ints.IntMultiteratorBase;
-import com.github.fge.multiterator.ints.IntValues;
+import com.github.fge.multiterator.IntValues;
 
 import java.util.Spliterator;
 

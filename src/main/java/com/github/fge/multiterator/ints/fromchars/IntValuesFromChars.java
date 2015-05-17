@@ -1,6 +1,6 @@
 package com.github.fge.multiterator.ints.fromchars;
 
-import com.github.fge.multiterator.internal.VisibleForTesting;
+import com.github.fge.multiterator.core.VisibleForTesting;
 import com.github.fge.multiterator.ints.IntValuesBase;
 
 @VisibleForTesting

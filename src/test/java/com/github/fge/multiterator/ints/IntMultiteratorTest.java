@@ -1,5 +1,7 @@
 package com.github.fge.multiterator.ints;
 
+import com.github.fge.multiterator.IntMultiterator;
+import com.github.fge.multiterator.IntValues;
 import com.github.fge.multiterator.Multiterator;
 import com.github.fge.multiterator.MultiteratorBuilder;
 import org.testng.annotations.Test;

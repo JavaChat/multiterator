@@ -1,6 +1,8 @@
 package com.github.fge.multiterator.ints;
 
-import com.github.fge.multiterator.internal.MultiteratorCore;
+import com.github.fge.multiterator.IntMultiterator;
+import com.github.fge.multiterator.IntValues;
+import com.github.fge.multiterator.core.MultiteratorCore;
 
 import java.util.Spliterator;
 import java.util.stream.Stream;

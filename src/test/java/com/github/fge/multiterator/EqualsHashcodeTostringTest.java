@@ -1,8 +1,8 @@
 package com.github.fge.multiterator;
 
-import com.github.fge.multiterator.array.ArrayValues;
-import com.github.fge.multiterator.collection.CollectionValues;
-import com.github.fge.multiterator.list.ListValues;
+import com.github.fge.multiterator.generic.array.ArrayValues;
+import com.github.fge.multiterator.generic.collection.CollectionValues;
+import com.github.fge.multiterator.generic.list.ListValues;
 import org.assertj.core.api.AutoCloseableSoftAssertions;
 import org.testng.annotations.Test;
 

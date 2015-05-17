@@ -1,5 +1,6 @@
 package com.github.fge.multiterator.ints;
 
+import com.github.fge.multiterator.IntMultiterator;
 import com.github.fge.multiterator.MultiteratorBuilder;
 import com.github.fge.multiterator.ints.fromchars.IntMultiteratorFromChars;
 
