@@ -1,6 +1,7 @@
 package com.github.fge.multiterator.list;
 
 import com.github.fge.multiterator.base.ValuesBase;
+import com.github.fge.multiterator.internal.VisibleForTesting;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -11,7 +12,8 @@ public final class ListValues<T>
     private final List<T> list;
 
     @SuppressWarnings("AssignmentToCollectionOrArrayFieldFromParameter")
-    ListValues(final List<T> list, final int inputSize,
+    @VisibleForTesting
+    public ListValues(final List<T> list, final int inputSize,
         final int windowSize)
     {
         super(inputSize, windowSize);

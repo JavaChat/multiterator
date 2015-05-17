@@ -1,6 +1,7 @@
 package com.github.fge.multiterator.collection;
 
 import com.github.fge.multiterator.base.ValuesBase;
+import com.github.fge.multiterator.internal.VisibleForTesting;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -14,7 +15,8 @@ public final class CollectionValues<T>
 
     private final Iterator<T> iterator;
 
-    CollectionValues(final Iterator<T> iterator, final int inputSize,
+    @VisibleForTesting
+    public CollectionValues(final Iterator<T> iterator, final int inputSize,
         final int windowSize)
     {
         super(inputSize, windowSize);

@@ -1,6 +1,7 @@
 package com.github.fge.multiterator.array;
 
 import com.github.fge.multiterator.base.ValuesBase;
+import com.github.fge.multiterator.internal.VisibleForTesting;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
@@ -11,7 +12,9 @@ public final class ArrayValues<T>
     private final T[] array;
 
     @SuppressWarnings("AssignmentToCollectionOrArrayFieldFromParameter")
-    ArrayValues(final T[] array, final int inputSize, final int windowSize)
+    @VisibleForTesting
+    public ArrayValues(final T[] array, final int inputSize,
+        final int windowSize)
     {
         super(inputSize, windowSize);
         this.array = array;
