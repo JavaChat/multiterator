@@ -6,11 +6,11 @@ import java.util.function.IntPredicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-abstract class IntValuesBase<V extends IntValuesBase<V>>
+public abstract class IntValuesBase<V extends IntValuesBase<V>>
     extends ValuesCore<V>
     implements IntValues
 {
-    IntValuesBase(final int inputSize, final int windowSize)
+    protected IntValuesBase(final int inputSize, final int windowSize)
     {
         super(inputSize, windowSize);
     }

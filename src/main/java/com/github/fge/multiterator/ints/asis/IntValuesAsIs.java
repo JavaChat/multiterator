@@ -1,12 +1,17 @@
-package com.github.fge.multiterator.ints;
+package com.github.fge.multiterator.ints.asis;
 
-final class IntValuesAsIs
+import com.github.fge.multiterator.internal.VisibleForTesting;
+import com.github.fge.multiterator.ints.IntValuesBase;
+
+@VisibleForTesting
+public final class IntValuesAsIs
     extends IntValuesBase<IntValuesAsIs>
 {
     private final int[] array;
 
     @SuppressWarnings("AssignmentToCollectionOrArrayFieldFromParameter")
-    IntValuesAsIs(final int[] array, final int inputSize, final int windowSize)
+    public IntValuesAsIs(final int[] array, final int inputSize,
+        final int windowSize)
     {
         super(inputSize, windowSize);
         this.array = array;

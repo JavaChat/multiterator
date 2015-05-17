@@ -3,8 +3,8 @@ package com.github.fge.multiterator;
 import com.github.fge.multiterator.array.ArrayMultiterator;
 import com.github.fge.multiterator.collection.CollectionMultiterator;
 import com.github.fge.multiterator.ints.IntMultiterator;
-import com.github.fge.multiterator.ints.IntMultiteratorAsIs;
-import com.github.fge.multiterator.ints.IntMultiteratorFromChars;
+import com.github.fge.multiterator.ints.asis.IntMultiteratorAsIs;
+import com.github.fge.multiterator.ints.fromchars.IntMultiteratorFromChars;
 import com.github.fge.multiterator.list.ListMultiterator;
 
 import java.util.Collection;

@@ -1,12 +1,16 @@
-package com.github.fge.multiterator.ints;
+package com.github.fge.multiterator.ints.fromchars;
 
-final class IntValuesFromChars
+import com.github.fge.multiterator.internal.VisibleForTesting;
+import com.github.fge.multiterator.ints.IntValuesBase;
+
+@VisibleForTesting
+public final class IntValuesFromChars
     extends IntValuesBase<IntValuesFromChars>
 {
     private final char[] array;
 
     @SuppressWarnings("AssignmentToCollectionOrArrayFieldFromParameter")
-    IntValuesFromChars(final char[] array, final int inputSize,
+    public IntValuesFromChars(final char[] array, final int inputSize,
         final int windowSize)
     {
         super(inputSize, windowSize);
