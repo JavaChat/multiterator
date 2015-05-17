@@ -1,7 +1,7 @@
-package com.github.fge.multiterator.ints.asis;
+package com.github.fge.multiterator.primitives.ints.asis;
 
 import com.github.fge.multiterator.core.VisibleForTesting;
-import com.github.fge.multiterator.ints.IntValuesBase;
+import com.github.fge.multiterator.primitives.ints.IntValuesBase;
 
 @VisibleForTesting
 public final class IntValuesAsIs

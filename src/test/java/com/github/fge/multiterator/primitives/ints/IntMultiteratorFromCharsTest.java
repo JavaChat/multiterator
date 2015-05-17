@@ -1,8 +1,8 @@
-package com.github.fge.multiterator.ints;
+package com.github.fge.multiterator.primitives.ints;
 
 import com.github.fge.multiterator.IntMultiterator;
 import com.github.fge.multiterator.MultiteratorBuilder;
-import com.github.fge.multiterator.ints.fromchars.IntMultiteratorFromChars;
+import com.github.fge.multiterator.primitives.ints.fromchars.IntMultiteratorFromChars;
 
 import java.util.stream.IntStream;
 

@@ -1,7 +1,7 @@
-package com.github.fge.multiterator.ints;
+package com.github.fge.multiterator.primitives.ints;
 
 import com.github.fge.multiterator.IntValues;
-import com.github.fge.multiterator.ints.asis.IntValuesAsIs;
+import com.github.fge.multiterator.primitives.ints.asis.IntValuesAsIs;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;

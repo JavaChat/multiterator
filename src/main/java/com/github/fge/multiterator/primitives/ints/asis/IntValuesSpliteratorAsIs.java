@@ -1,6 +1,6 @@
-package com.github.fge.multiterator.ints.asis;
+package com.github.fge.multiterator.primitives.ints.asis;
 
-import com.github.fge.multiterator.ints.IntValuesSpliteratorBase;
+import com.github.fge.multiterator.primitives.ints.IntValuesSpliteratorBase;
 
 public final class IntValuesSpliteratorAsIs
     extends IntValuesSpliteratorBase<IntValuesAsIs>

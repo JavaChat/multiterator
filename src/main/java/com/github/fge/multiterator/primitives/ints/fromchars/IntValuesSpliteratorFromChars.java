@@ -1,6 +1,6 @@
-package com.github.fge.multiterator.ints.fromchars;
+package com.github.fge.multiterator.primitives.ints.fromchars;
 
-import com.github.fge.multiterator.ints.IntValuesSpliteratorBase;
+import com.github.fge.multiterator.primitives.ints.IntValuesSpliteratorBase;
 
 public final class IntValuesSpliteratorFromChars
     extends IntValuesSpliteratorBase<IntValuesFromChars>

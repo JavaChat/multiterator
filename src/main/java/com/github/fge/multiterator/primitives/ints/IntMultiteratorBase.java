@@ -1,4 +1,4 @@
-package com.github.fge.multiterator.ints;
+package com.github.fge.multiterator.primitives.ints;
 
 import com.github.fge.multiterator.IntMultiterator;
 import com.github.fge.multiterator.IntValues;
